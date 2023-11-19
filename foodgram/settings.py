@@ -134,6 +134,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 AUTH_USER_MODEL = "users.User"
 
+# Login
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "recipe_list"
+LOGOUT_REDIRECT_URL = "recipe_list"
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
