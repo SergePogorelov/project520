@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}Shopping list{% endblock title %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static '/pages/shopList.css' %}">
+{% endblock stylesheet %}
+
+{% block content %}
+    <div class="main__header">
+        <h1 class="main__title">Shopping list {% if not shoppinglist %}empty{% endif %}</h1>
+    </div>
+    <div class="card-list card-list_column">
+
+        <ul class="shopping-list">
+        {% for object in shoppinglist %}
+            <li class="shopping-list__item" data-id="{{ object.id }}">
+                <div class="recipe recipe_reverse">
+
+                    {% thumbnail object.image "90x90" crop="center" as im %}
+                        <img src="{{ im.url }}" alt="{{ object.name }}" class="recipe__image recipe__image_big">
+                    {% endthumbnail %}
+
+                    <a href="{{ object.get_absolute_url }}" class="link" target="_blank"><h3 class="recipe__title">{{ object.name }}</h3></a>
+                    <p class="recipe__text"><span class="icon-time"></span> {{ object.cooking_time }} min.</p>
+                </div>
+                <a href="#" class="shopping-list__button link">Remove</a>
+            </li>
+        {% endfor %}
+
+        </ul>
+        {% if shoppinglist %}
+            <a href="{% url 'download_shoppinglist' %}" target="_blank"><button class="button button_style_blue">Download</button></a>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {% include "includes/scripts.html" with page="shopList" %}
+
+{% endblock scripts %}
