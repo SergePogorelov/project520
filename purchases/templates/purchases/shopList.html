@@ -1,0 +1,35 @@
+<html>
+<body>
+    <h1>Grocery assistant</h1>
+    We have compiled a list of products for you according to the recipes you have chosen:
+    <ol>
+    {% for recipe in shoppinglist %}
+        <li>{{ recipe.name }}</li>
+    {% endfor %}
+    </ol>
+    <h3>Product list:</h1>
+
+    <table>
+        <thead>
+            <tr>
+            <th>№</th>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Recipe</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for title, value, dimention, recipes in ingridients %}
+            <tr class="row{% cycle "1" "2" %}">
+                <td>{{ forloop.counter }}. </td>
+                <td>{{ title|capfirst }}</td>
+                <td>{{ value }} {{ dimention }}.</td>
+                <td>{{ recipes|join:', ' }}</td>
+            </tr>
+                {% endfor %}
+                <tr>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
