@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Error 404 {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static '/pages/index.css' %}">
+{% endblock stylesheet %}
+
+{% block content %}
+
+        <h1>Error 404</h1>
+        <p>Page {{ path }} not found</p>
+        <p><a href="{% url 'recipe_list' %}">Back to the main</a></p>
+
+
+{% endblock %}
+
