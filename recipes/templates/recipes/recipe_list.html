@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+{% load recipe_filters %}
+
+{% block title %}
+{%if author %}Author's recipes: {{ author.get_full_name }}
+{% elif current_page == "favorite" %} Favorites
+{% else %}
+Recipes
+{% endif %}
+{% endblock title %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static '/pages/index.css' %}">
+{% endblock stylesheet %}
+
+{% block content %}
+        <div class="main__header">
+            <h1 class="main__title">
+                {%if author %}Author's recipes: {{ author.get_full_name }}
+                {% elif current_page == "favorite" %} Favorites
+                {% else %}
+                Recipes
+                {% endif %}
+            </h1>
+            
+            {% include "includes/filters.html" with filters=filters %}
+
+        </div>
+        {% if author and author != user and user.is_authenticated%}
+            <div class="author-subscribe" data-author="{{ author.id }}">
+                <p style="padding: 0 0 2em 0;"><button class="button button_style_light-blue button_size_subscribe" name="subscribe" {% if is_subscribed %}>Unsubscribe from the author{% else %}data-out>Subscribe to the author{% endif %}</button></p>
+            </div>
+        {% endif %}
+        <div class="card-list">
+        {% for recipe in page_obj %}
+        
+        <div class="card" data-id="{{ recipe.pk }}">
+            
+            {% thumbnail recipe.image "364x240" crop="center" upscale=True as im %}
+                <a href="{{recipe.get_absolute_url}}" class="link" target="_blank"><img src="{{ im.url }}" alt="{{ recipe.name }}" class="card__image"></a>
+            {% endthumbnail %}
+
+            <div class="card__body">
+                <a class="card__title link" href="{{ recipe.get_absolute_url }}" target="_blank">{{ recipe.name }}</a>
+                <ul class="card__items">
+                    {% if recipe.breakfast %}<li class="card__item"><span class="badge badge_style_orange ">Breakfast</span></li>{% endif %}
+                    {% if recipe.lunch %}<li class="card__item"><span class="badge badge_style_green">Lunch</span></li>{% endif %}
+                    {% if recipe.dinner %}<li class="card__item"><span class="badge badge_style_purple">Dinner</span></li>{% endif %}
+                </ul>
+                <div class="card__items card__items_column">
+                    <p class="card__text"><span class="icon-time"></span> {{ recipe.cooking_time }} min.</p>
+                    <p class="card__text"><span class="icon-user"></span> <a href="{%url "author_recipe_list" recipe.author.username %}" style="color: black">{{ recipe.author.get_full_name }}</a></p>
+                </div>
+            </div>
+            <div class="card__footer">
+            {% if recipe.slug in shoplist %}
+                <button class="button button_style_light-blue-outline" name="purchases"><span class="icon-check button__icon"></span> Recipe added</button>
+            {% else %}
+                <button class="button button_style_light-blue" name="purchases" data-out><span class="icon-plus button__icon"></span>Add to purchases</button>
+            {% endif %}
+                {% if user.is_authenticated %}
+                        {% if recipe.id|is_favorite:user.id %}
+                            <button class="button button_style_none" name="favorites"><span class="icon-favorite icon-favorite_active"></span></button>
+                        {% else %}
+                            <button class="button button_style_none" name="favorites" data-out><span class="icon-favorite"></span></button>
+                        {% endif %}  
+                {% endif %} 
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+        {% include "includes/paginator.html" with items=page_obj paginator=paginator filters=filters%}
+    {% endif %}
+        
+{% endblock content %}
+
+{% block scripts %}
+  
+  {% if current_page == "favorite" %}
+    {% include "includes/scripts.html" with page="favorite" %}
+  {% elif author %}
+    {% include "includes/scripts.html" with page="authorRecipe" %}
+  {% elif user.is_authenticated %}
+    {% include "includes/scripts.html" with page="indexAuth" %}
+  {% else %}
+    {% include "includes/scripts.html" with page="indexNotAuth" %}
+  {% endif %}
+  
+{% endblock scripts %}
