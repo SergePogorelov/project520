@@ -85,3 +85,36 @@ Authenticated users can:
 - Work with a personalized favorites list: add/remove other users' recipes and view their own favorite recipes page.
 - Work with a personalized shopping list: add/remove any recipes and download a file with the quantity of required ingredients for recipes in the shopping list.
 - Subscribe to recipe authors' publications, unsubscribe, and view their own subscriptions page.
+
+
+## Installation on a Local Computer
+These instructions will help you create a copy of the project and run it on your local computer for development and testing purposes.
+
+### Running the Project (Linux Example)
+
+Before getting started, if you're not using `Python 3`, you'll need to install the `virtualenv` tool using `pip install virtualenv`. If you're using `Python 3`, you should already have the [venv](https://docs.python.org/3/library/venv.html) module installed as part of the standard library.
+
+- Create a project folder named "foodgram" on your computer: `mkdir foodgram` and navigate to it: `cd foodgram`.
+- Clone this repository into the current folder: `git clone https://github.com/SergePogorelov/foodgram .`
+- Create a virtual environment: `python3 -m venv venv`.
+- Activate the virtual environment: `source venv/bin/activate`.
+- Create a file named `.env` and add the environment variables to it:
+
+```
+SECRET_KEY = # Django secret key
+DEBUG=1
+```
+- Install the dependencies: `pip install -r requirements.txt`.
+- Apply migrations: `python manage.py migrate`.
+- Create a Django superuser: `python manage.py createsuperuser --username admin --email 'admin@example.com'`.
+- Start the Django development server: `python manage.py runserver`.
+
+
+## Technologies Used in Development
+- [Python](https://www.python.org/)
+- [Django](https://www.djangoproject.com/)
+- [Django REST framework](https://www.django-rest-framework.org/)
+- [Pillow](https://pypi.org/project/Pillow/)
+- [Sorl-thumbnail](https://pypi.org/project/sorl-thumbnail/)
+- [WeasyPrint](https://weasyprint.org/)
+- [PostgreSQL](https://www.postgresql.org/)
