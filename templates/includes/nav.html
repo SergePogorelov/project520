@@ -1,0 +1,30 @@
+<header class="header">
+    <nav class="nav">
+        <div class="nav__container container">
+            
+            <ul class="nav__items list">
+            {% if user.is_authenticated %}
+                <li class="nav__item {% if current_page == "recipe" %}nav__item_active {% endif %}"><a href="{% url 'recipe_list' %}" class="nav__link link">Recipes</a></li>
+                <li class="nav__item {% if current_page == "create_recipe" %}nav__item_active {% endif %}"><a href="{% url "recipe_create" %}" class="nav__link link">Create a recipe</a></li>
+                <li class="nav__item {% if current_page == "subscription" %}nav__item_active {% endif %}"><a href="{% url 'subscription_list' user.username %}" class="nav__link link">My subscriptions</a></li>
+                <li class="nav__item {% if current_page == "favorite" %}nav__item_active {% endif %}"><a href="{% url 'favorite_list' user.username %}" class="nav__link link">Favorites</a></li>
+                <li class="nav__item {% if current_page == "shoppinglist" %}nav__item_active {% endif %}"><a href="{% url 'shoppinglist_detail'%}" class="nav__link link">Shopping list</a> <span class="badge badge_style_blue nav__badge" id="counter">{{ shoplist|length }}</span></li>
+            {% else %}
+                <li class="nav__item {% if current_page == "recipe" %}nav__item_active {% else %}nav__item_disabled{% endif %}"><a href="{% url 'recipe_list' %}" class="nav__link link">Recipes</a></li>
+                <li class="nav__item {% if current_page == "shoppinglist" %}nav__item_active {% else %}nav__item_disabled{% endif %}"><a href="{% url 'shoppinglist_detail'%}" class="nav__link link">Shopping list</a><span class="badge badge_style_blue nav__badge" id="counter">{{ shoplist|length }}</span></li>
+            {% endif %}
+            </ul>
+
+            <ul class="nav__items list">
+            {% if user.is_authenticated %}
+                <li class="nav__item"><a href="{% url 'password_change' %}" class="nav__link link">Change password</a></li>
+                <li class="nav__item"><a href="{% url 'logout' %}" class="nav__link link">Exit</a></li>
+            {% else %}
+                <li class="nav__item"><a href="{% url 'login' %}" class="nav__link link">Login</a></li>
+                <li class="nav__item"><a href="{% url 'signup' %}" class="button button_style_blue">Create an account</a></li>
+            {% endif %}
+            </ul>
+            
+        </div>
+    </nav>
+</header>

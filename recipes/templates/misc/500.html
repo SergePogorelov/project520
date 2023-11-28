@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Error 500 {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static '/pages/index.css' %}">
+{% endblock stylesheet %}
+
+{% block content %}
+
+        <h1>Error 500</h1>
+        <p>Error on the server, try refreshing the page or contact us later</p>
+        <p><a href="{% url 'recipe_list' %}">Back to the main</a></p>
+
+
+{% endblock %}
+
