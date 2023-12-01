@@ -11,6 +11,12 @@ User = get_user_model()
 
 
 class Tag:
+    """
+    Contains constants for recipe tags.
+
+    Usage: TAGS is a list containing available recipe tags.
+    """
+
     BREAKFAST = "breakfast"
     LUNCH = "lunch"
     DINNER = "dinner"
@@ -18,6 +24,10 @@ class Tag:
 
 
 class Ingredient(models.Model):
+    """
+    Represents an ingredient used in recipes.
+    """
+
     title = models.CharField("Title", max_length=50)
     dimension = models.CharField("Dimension", max_length=50)
 
@@ -30,6 +40,10 @@ class Ingredient(models.Model):
 
 
 class Recipe(models.Model):
+    """
+    Represents a recipe uploaded by a user.
+    """
+
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -85,6 +99,10 @@ class Recipe(models.Model):
 
 
 class IngredientValue(models.Model):
+    """
+    Represents the quantity of ingredients in a recipe.
+    """
+
     ingredient = models.ForeignKey(
         Ingredient,
         related_name="ingredient_values",
@@ -108,6 +126,10 @@ class IngredientValue(models.Model):
 
 
 class Subscription(models.Model):
+    """
+    Represents a user subscription to another user.
+    """
+
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="follower"
     )
@@ -124,6 +146,9 @@ class Subscription(models.Model):
 
 
 class Favorite(models.Model):
+    """
+    Represents a user favoriting a recipe.
+    """
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="favorites"
     )

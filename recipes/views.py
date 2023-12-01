@@ -19,6 +19,9 @@ User = get_user_model()
 
 
 class RecipeDetailView(DetailView):
+    """
+    Displays the details of a single recipe including ingredients.
+    """
     model = Recipe
 
     def get_context_data(self, **kwargs):
@@ -37,6 +40,10 @@ class RecipeDetailView(DetailView):
 
 
 class RecipeCreateView(LoginRequiredMixin, CreateView):
+    """
+    Allows authenticated users to create new recipes.
+    """
+
     model = Recipe
     form_class = RecipeForm
 
@@ -60,6 +67,10 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
 
 
 class RecipeUpdateView(LoginRequiredMixin, IsAuthorMixin, UpdateView):
+    """
+    Allows authenticated users who are authors of recipes to update their own recipes.
+    """
+
     model = Recipe
     form_class = RecipeForm
 
@@ -82,6 +93,10 @@ class RecipeUpdateView(LoginRequiredMixin, IsAuthorMixin, UpdateView):
 
 
 class RecipeDeleteView(LoginRequiredMixin, IsAuthorMixin, DeleteView):
+    """
+    Allows authenticated users who are authors of recipes to delete their own recipes.
+    """
+
     model = Recipe
 
     def get_success_url(self):
@@ -95,10 +110,16 @@ class RecipeDeleteView(LoginRequiredMixin, IsAuthorMixin, DeleteView):
 
 
 class RecipeListView(RecipeMixin, ListView):
+    """
+    Displays a list of recipes with pagination and filtering options.
+    """
     pass
 
 
 class AuthorRecipeListView(RecipeMixin, ListView):
+    """
+    Displays a list of recipes by a specific author with pagination and filtering options.
+    """
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         author = get_object_or_404(User, username=self.kwargs.get("username"))
@@ -118,6 +139,10 @@ class AuthorRecipeListView(RecipeMixin, ListView):
 
 
 class FavoriteRecipeListView(LoginRequiredMixin, RecipeMixin, ListView):
+    """
+    Displays a list of recipes favorited by the current user.
+    """
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["current_page"] = "favorite"
@@ -132,6 +157,10 @@ class FavoriteRecipeListView(LoginRequiredMixin, RecipeMixin, ListView):
 
 
 class SubscriptionListView(LoginRequiredMixin, ListView):
+    """
+    Displays a list of subscriptions for the current user.
+    """
+
     model = Subscription
     paginate_by = 6
 
