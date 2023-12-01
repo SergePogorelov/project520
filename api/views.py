@@ -21,6 +21,11 @@ User = get_user_model()
 
 
 class IngredientListAPIView(ListAPIView):
+    """
+    Allows retrieval of a list of all ingredients.
+    Supports filtering ingredients by title using 'query' parameter.
+    """
+
     serializer_class = IngredientSerializer
 
     def get_queryset(self):
@@ -34,10 +39,17 @@ class IngredientListAPIView(ListAPIView):
 
 
 class SubscriptionCreateAPIView(CreateAPIView):
+    """
+    Allows users to subscribe to authors.
+    """
     serializer_class = SubscriptionSerializer
 
 
 class SubscriptionDeleteAPIView(DestroyAPIView):
+    """
+    Allows users to unsubscribe from authors.
+    """
+
     serializer_class = SubscriptionSerializer
     queryset = User.objects.all()
 
@@ -49,10 +61,18 @@ class SubscriptionDeleteAPIView(DestroyAPIView):
 
 
 class FavoriteCreateAPIView(CreateAPIView):
+    """
+    Allows users to add recipes to their favorites.
+    """
+
     serializer_class = FavoriteSerializer
 
 
 class FavoriteDeleteAPIView(DestroyAPIView):
+    """
+    Allows users to remove recipes from their favorites.
+    """
+
     serializer_class = FavoriteSerializer
     queryset = Recipe.objects.all()
 
@@ -64,6 +84,10 @@ class FavoriteDeleteAPIView(DestroyAPIView):
 
 
 class ShoppingListCreateAPIView(CreateAPIView):
+    """
+    Allows users to add recipes to their shopping lists.
+    """
+
     serializer_class = ShoppingListSerializer
     queryset = Recipe.objects.all()
     permission_classes = [AllowAny]
@@ -76,6 +100,10 @@ class ShoppingListCreateAPIView(CreateAPIView):
 
 
 class ShoppingListDestroyAPIView(DestroyAPIView):
+    """
+    Allows users to remove recipes from their shopping lists.
+    """
+
     serializer_class = ShoppingListSerializer
     queryset = Recipe.objects.all()
     permission_classes = [AllowAny]

@@ -11,12 +11,20 @@ User = get_user_model()
 
 
 class IngredientSerializer(serializers.ModelSerializer):
+    """
+    Serializes Ingredient model fields for API interaction.
+    """
     class Meta:
         model = Ingredient
         fields = ["title", "dimension"]
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
+    """
+    Serializes Subscription model fields for API interaction.
+    Validates subscription requests and checks for existing subscriptions.
+    """
+
     id = serializers.IntegerField()
 
     class Meta:
@@ -43,6 +51,11 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
 
 class FavoriteSerializer(serializers.ModelSerializer):
+    """
+    Serializes Favorite model fields for API interaction.
+    Validates favorite requests and checks for existing favorites.
+    """
+
     id = serializers.IntegerField()
 
     class Meta:
@@ -65,6 +78,11 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
 
 class ShoppingListSerializer(serializers.Serializer):
+    """
+    Serializes ShoppingList requests for API interaction.
+    Adds recipes to the user's shopping list.
+    """
+
     id = serializers.IntegerField()
 
     def create(self, validated_data):
