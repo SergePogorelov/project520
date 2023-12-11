@@ -87,6 +87,51 @@ Authenticated users can:
 - Subscribe to recipe authors' publications, unsubscribe, and view their own subscriptions page.
 
 
+## Foodgram API Endpoints
+
+### Subscriptions
+
+- **DELETE Subscription**
+  - Endpoint: `/v1/subscriptions/<int:pk>/`
+  - Description: Delete a subscription by ID.
+  - Method: `DELETE`
+
+- **Create Subscription**
+  - Endpoint: `/v1/subscriptions/`
+  - Description: Create a new subscription.
+  - Method: `POST`
+
+### Favorites
+
+- **DELETE Favorite**
+  - Endpoint: `/v1/favorites/<int:pk>/`
+  - Description: Delete a favorite by ID.
+  - Method: `DELETE`
+
+- **Create Favorite**
+  - Endpoint: `/v1/favorites/`
+  - Description: Create a new favorite.
+  - Method: `POST`
+
+### Purchases
+
+- **Create Shopping List**
+  - Endpoint: `/v1/purchases/`
+  - Description: Create a new shopping list.
+  - Method: `POST`
+
+- **DELETE Shopping List Item**
+  - Endpoint: `/v1/purchases/<int:pk>/`
+  - Description: Delete a shopping list item by ID.
+  - Method: `DELETE`
+
+### Ingredients
+
+- **List Ingredients**
+  - Endpoint: `/v1/ingredients/`
+  - Description: Retrieve a list of ingredients.
+  - Method: `GET`
+
 ## Installation on a Local Computer
 These instructions will help you create a copy of the project and run it on your local computer for development and testing purposes.
 
