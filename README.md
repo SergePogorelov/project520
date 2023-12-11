@@ -109,6 +109,35 @@ DEBUG=1
 - Create a Django superuser: `python manage.py createsuperuser --username admin --email 'admin@example.com'`.
 - Start the Django development server: `python manage.py runserver`.
 
+## Running Tests
+
+To execute the tests, use the following command:
+
+```bash
+python3 manage.py test tests
+```
+
+#### Measuring Coverage
+
+To assess test coverage, run the tests with coverage:
+
+```bash
+coverage run manage.py test tests
+```
+
+To view the coverage report in the terminal, execute:
+
+```bash
+coverage report
+```
+
+To generate an HTML report for a more detailed view:
+```bash
+coverage html
+```
+
+The HTML report can be accessed at `htmlcov/index.html`.
+
 
 ## Technologies Used in Development
 - [Python](https://www.python.org/)
