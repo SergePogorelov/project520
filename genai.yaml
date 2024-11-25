@@ -21,7 +21,7 @@ interface:
     modalAcceptance: true
     modalTitle: ""
     modalContent: | 
-      ### !!! GIT HUB!! This is a pre-Beta version under active development:
+      ### !!! GIT HUB CHECK UPDATE!! This is a pre-Beta version under active development:
       This platform is currently under active development. As we continue to innovate and refine the experience, you may encounter features that are rapidly evolving, as well as occasional instabilities or unexpected behavior.
       ### Data Security and Privacy:
       During this pre-beta period only input and share publicly available data. Although your data is not being used to train models, this application has not yet been officially approved for non-public data.At this time, chat history and any files uploaded via the platform may be deleted without any notice. **Prior to release, we will integrate UMass data privacy and security standards to allow sharing of non-public data.**
